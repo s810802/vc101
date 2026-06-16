@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>阿昌哥研習共學｜AI 賦能企業．智慧驅動未來</title>
+  <meta name="description" content="阿昌哥研習共學提供 AI 教育培訓、企業 AI 導入、流程自動化、資料分析、私有化知識庫與 AI 轉型顧問服務。" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            techBlue: '#0077C8',
+            premiumPurple: '#008B88',
+            mintGreen: '#FF9D00',
+            softBg: '#F2F4F7'
+          },
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans TC', 'sans-serif']
+          },
+          boxShadow: {
+            glow: '0 0 40px rgba(255, 157, 0, 0.22)',
+            blueGlow: '0 20px 60px rgba(0, 119, 200, 0.18)',
+            card: '0 24px 80px rgba(15, 23, 42, 0.08)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* =========================
+       Global Base
+    ========================== */
+    :root {
+      --tech-blue: #0077C8;
+      --premium-purple: #008B88;
+      --mint-green: #FF9D00;
+      --ink: #2E3A46;
+      --muted: #6B7C93;
+      --line: rgba(0, 119, 200, 0.12);
+      --glass: rgba(255, 255, 255, 0.78);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans TC', sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(0, 119, 200, 0.12), transparent 30%),
+        radial-gradient(circle at 85% 15%, rgba(0, 139, 136, 0.10), transparent 34%),
+        radial-gradient(circle at 50% 90%, rgba(255, 157, 0, 0.10), transparent 35%),
+        linear-gradient(180deg, #ffffff 0%, #F2F4F7 45%, #ffffff 100%);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(0, 119, 200, 0.16);
+      color: #004e7c;
+    }
+
+    /* =========================
+       White Tech Background
+    ========================== */
+    #techCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .site-bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0, 119, 200, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 119, 200, 0.055) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.76), rgba(0,0,0,0.15), transparent);
+    }
+
+    .aurora {
+      position: fixed;
+      inset: -20%;
+      z-index: -5;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(0, 119, 200, 0.16), transparent 28%),
+        radial-gradient(circle at 75% 20%, rgba(0, 139, 136, 0.13), transparent 30%),
+        radial-gradient(circle at 50% 75%, rgba(255, 157, 0, 0.10), transparent 35%);
+      filter: blur(18px);
+      animation: auroraMove 16s ease-in-out infinite alternate;
+    }
+
+    .data-line {
+      position: absolute;
+      height: 1px;
+      width: 220px;
+      background: linear-gradient(90deg, transparent, rgba(0, 119, 200, 0.32), rgba(255, 157, 0, 0.22), transparent);
+      opacity: 0.42;
+      animation: dataFlow 8s linear infinite;
+    }
+
+    .data-line.line-1 { top: 22%; left: 8%; animation-delay: -2s; }
+    .data-line.line-2 { top: 52%; right: 8%; animation-delay: -5s; width: 300px; }
+    .data-line.line-3 { top: 76%; left: 18%; animation-delay: -1s; width: 260px; }
+
+    @keyframes auroraMove {
+      0% { transform: translate3d(-2%, -1%, 0) scale(1); }
+      100% { transform: translate3d(2%, 2%, 0) scale(1.04); }
+    }
+
+    @keyframes dataFlow {
+      0% { transform: translateX(-50px); opacity: 0; }
+      18% { opacity: 0.45; }
+      80% { opacity: 0.35; }
+      100% { transform: translateX(160px); opacity: 0; }
+    }
+
+    /* =========================
+       Glass & Premium Effects
+    ========================== */
+    .glass-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.66));
+      border: 1px solid rgba(0, 119, 200, 0.18);
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .bg-primary-soft { background-color: rgba(0, 119, 200, 0.10); }
+    .bg-secondary-soft { background-color: rgba(0, 139, 136, 0.10); }
+    .bg-accent-soft { background-color: rgba(255, 157, 0, 0.10); }
+    .border-primary-soft { border-color: rgba(0, 119, 200, 0.18); }
+    .border-soft, .border-neutral-soft { border-color: rgba(148, 163, 184, 0.18); }
+    .text-primary { color: var(--tech-blue); }
+    .text-secondary { color: var(--premium-purple); }
+    .text-accent { color: var(--mint-green); }
+    .text-ink { color: var(--ink); }
+    .bg-ink { background-color: var(--ink); }
+    .text-muted { color: var(--muted); }
+    .text-soft { color: rgba(46, 58, 70, 0.54); }
+    .bg-glass { background: rgba(255, 255, 255, 0.78); }
+    .bg-soft { background: var(--soft-bg); }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.78);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--tech-blue), var(--premium-purple), var(--mint-green));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .soft-border {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .soft-border::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0, 119, 200, 0.42), rgba(0, 139, 136, 0.26), rgba(255, 157, 0, 0.36));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      pointer-events: none;
+      opacity: 0.45;
+      transition: opacity .35s ease;
+    }
+
+    .soft-border:hover::before {
+      opacity: 1;
+    }
+
+    .shine {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shine::after {
+      content: "";
+      position: absolute;
+      top: -60%;
+      left: -120%;
+      width: 70%;
+      height: 220%;
+      background: linear-gradient(110deg, transparent, rgba(255,255,255,0.7), transparent);
+      transform: rotate(18deg);
+      transition: left .75s ease;
+      pointer-events: none;
+    }
+
+    .shine:hover::after {
+      left: 135%;
+    }
+
+    /* =========================
+       Buttons
+    ========================== */
+    .btn-premium {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      border-radius: 999px;
+      padding: 0.95rem 1.35rem;
+      font-weight: 800;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .btn-premium::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+      opacity: 0;
+      background: linear-gradient(90deg, var(--tech-blue), var(--premium-purple), var(--mint-green));
+      transition: opacity .28s ease;
+      filter: blur(8px);
+    }
+
+    .btn-premium:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 50px rgba(255, 157, 0, 0.22), 0 18px 60px rgba(0, 119, 200, 0.14);
+    }
+
+    .btn-premium:hover::before {
+      opacity: 0.64;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--tech-blue), var(--premium-purple));
+      box-shadow: 0 18px 40px rgba(0, 119, 200, 0.22);
+    }
+
+    .btn-secondary {
+      color: #1e3a8a;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(37, 99, 235, 0.16);
+    }
+
+    .avatar-frame {
+      display: inline-flex;
+      padding: 0.35rem;
+      border-radius: 2rem;
+      background: linear-gradient(135deg, rgba(0, 119, 200, 0.18), rgba(0, 139, 136, 0.18), rgba(255, 157, 0, 0.16));
+    }
+
+    .avatar-frame img {
+      display: block;
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 1.75rem;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 18px 40px rgba(0, 119, 200, 0.16);
+    }
+
+    .about-headshot {
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+    }
+
+    .about-headshot img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .about-headshot-card {
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+    }
+
+    .about-headshot-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform .35s ease;
+    }
+
+    .about-headshot-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .zoomable {
+      cursor: zoom-in;
+      transition: transform .35s ease, filter .35s ease;
+    }
+
+    .zoomable:hover {
+      transform: scale(1.02);
+      filter: saturate(1.05) brightness(1.02);
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 2rem;
+    }
+
+    .image-modal.show {
+      display: flex;
+    }
+
+    .image-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      border-radius: 2rem;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 30px 90px rgba(15, 23, 42, 0.28);
+    }
+
+    .image-modal-content img {
+      width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .image-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255,255,255,0.92);
+      color: var(--ink);
+      font-size: 1.25rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .image-modal-close:hover {
+      transform: scale(1.08);
+      background: white;
+    }
+
+    .image-modal-caption {
+      padding: 1rem 1.2rem 1.4rem;
+      color: var(--ink);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      background: rgba(255,255,255,0.92);
+    }
+
+    .scene-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.75rem;
+    }
+
+    .scene-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+
+    .scene-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .scene-meta {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem 1.1rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(15, 23, 42, 0.72) 100%);
+      color: #fff;
+    }
+
+    .scene-meta p {
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* =========================
+       Hero Typewriter
+    ========================== */
+    .type-cursor::after {
+      content: "|";
+      margin-left: 5px;
+      color: var(--mint-green);
+      animation: blink 0.85s infinite;
+    }
+
+    @keyframes blink {
+      0%, 45% { opacity: 1; }
+      46%, 100% { opacity: 0; }
+    }
+
+    /* =========================
+       Animations
+    ========================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .float-soft {
+      animation: floatSoft 6s ease-in-out infinite;
+    }
+
+    .float-soft-delay {
+      animation: floatSoft 7s ease-in-out infinite;
+      animation-delay: -2s;
+    }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .pulse-node {
+      animation: pulseNode 2.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseNode {
+      0%, 100% { opacity: .35; transform: scale(1); }
+      50% { opacity: .9; transform: scale(1.2); }
+    }
+
+    /* =========================
+       Cards
+    ========================== */
+    .service-card,
+    .case-card,
+    .blog-card {
+      transition: transform .32s ease, box-shadow .32s ease, border-color .32s ease;
+    }
+
+    .service-card:hover,
+    .case-card:hover,
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 90px rgba(0, 119, 200, 0.14);
+      border-color: rgba(0, 119, 200, 0.28);
+    }
+
+    .icon-bubble {
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.92), transparent 34%),
+        linear-gradient(135deg, rgba(0, 119, 200, 0.14), rgba(0, 139, 136, 0.10), rgba(255, 157, 0, 0.10));
+      border: 1px solid rgba(0, 119, 200, 0.14);
+    }
+
+    /* =========================
+       Section Label
+    ========================== */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .42rem .75rem;
+      border-radius: 999px;
+      background: rgba(0, 119, 200, 0.08);
+      color: var(--tech-blue);
+      border: 1px solid rgba(0, 119, 200, 0.14);
+      font-weight: 800;
+      font-size: .82rem;
+      letter-spacing: .02em;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+    }
+
+    .section-desc {
+      color: #64748b;
+      line-height: 1.9;
+      font-size: 1.05rem;
+    }
+
+    /* =========================
+       Mobile Menu
+    ========================== */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+
+    .mobile-menu.open {
+      max-height: 420px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 科技背景層 -->
+  <canvas id="techCanvas"></canvas>
+  <div class="aurora"></div>
+  <div class="site-bg-grid"></div>
+
+  <!-- 流動資料線 -->
+  <div class="pointer-events-none fixed inset-0 -z-[2] overflow-hidden">
+    <span class="data-line line-1"></span>
+    <span class="data-line line-2"></span>
+    <span class="data-line line-3"></span>
+  </div>
+
+  <!-- =========================
+       Navbar
+  ========================== -->
+  <header id="navbar" class="glass-nav fixed top-0 left-0 right-0 z-50">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+      <a href="#home" class="group flex items-center gap-3">
+        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-techBlue via-premiumPurple to-mintGreen text-white shadow-blueGlow">
+          <i class="fa-solid fa-brain text-lg"></i>
+        </div>
+        <div>
+          <p class="text-lg font-black tracking-tight text-ink">阿昌哥研習共學</p>
+          <p class="text-xs font-bold text-muted">AI Consultant · Learning Lab</p>
+        </div>
+      </a>
+
+      <div class="hidden items-center gap-7 lg:flex">
+        <a class="nav-link text-sm font-bold text-muted transition hover:text-techBlue" href="#home">首頁</a>
+        <a class="nav-link text-sm font-bold text-muted transition hover:text-techBlue" href="#about">關於阿昌哥</a>
+        <a class="nav-link text-sm font-bold text-muted transition hover:text-techBlue" href="#solutions">AI 解決方案</a>
+        <a class="nav-link text-sm font-bold text-muted transition hover:text-techBlue" href="#cases">實戰案例</a>
+        <a class="nav-link text-sm font-bold text-muted transition hover:text-techBlue" href="#blog">技術文章</a>
+        <a class="btn-premium btn-primary !px-5 !py-3 text-sm" href="https://calendar.app.google/AzGEGBygFtDKXD2t8" target="_blank" rel="noopener">
+          <span class="cta-text" data-default="預約諮詢" data-hover="Status: Ready to Connect">預約諮詢</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <button id="menuBtn" class="flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-soft bg-glass text-ink shadow-sm lg:hidden" aria-label="開啟選單">
+        <i class="fa-solid fa-bars text-lg"></i>
+      </button>
+    </nav>
+
+    <div id="mobileMenu" class="mobile-menu lg:hidden">
+      <div class="mx-5 mb-4 rounded-3xl border border-neutral-soft bg-glass p-4 shadow-card backdrop-blur-xl">
+        <a class="mobile-link block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-primary-soft hover:text-techBlue" href="#home">首頁</a>
+        <a class="mobile-link block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-primary-soft hover:text-techBlue" href="#about">關於阿昌哥</a>
+        <a class="mobile-link block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-primary-soft hover:text-techBlue" href="#solutions">AI 解決方案</a>
+        <a class="mobile-link block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-primary-soft hover:text-techBlue" href="#cases">實戰案例</a>
+        <a class="mobile-link block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-primary-soft hover:text-techBlue" href="#blog">技術文章</a>
+        <a class="mobile-link mt-2 flex items-center justify-center rounded-2xl bg-gradient-to-r from-techBlue to-premiumPurple px-4 py-3 font-black text-white" href="https://calendar.app.google/AzGEGBygFtDKXD2t8" target="_blank" rel="noopener">
+          立即預約 AI 諮詢
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================
+         Hero
+    ========================== -->
+    <section id="home" class="relative min-h-screen overflow-hidden px-5 pt-36 lg:px-8">
+      <div class="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.04fr_0.96fr]">
+        <div class="reveal">
+          <div class="eyebrow mb-6">
+            <span class="h-2 w-2 rounded-full bg-mintGreen pulse-node"></span>
+            AI 教育培訓 × 資料科學 × 數位轉型顧問
+          </div>
+
+          <h1 class="min-h-[6.8rem] text-[2.55rem] font-black leading-tight tracking-[-0.06em] text-ink sm:text-6xl lg:text-7xl">
+            <span id="typewriter" class="type-cursor gradient-text"></span>
+          </h1>
+
+          <p class="mt-7 max-w-2xl text-lg leading-9 text-muted">
+            從 AI 教育培訓、流程自動化、資料分析到私有化知識庫建置，我們協助企業打造真正可落地、可持續、可擴展的 AI 解決方案，讓 AI 成為組織創新與競爭力提升的核心引擎。
+          </p>
+
+          <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+            <a href="https://calendar.app.google/AzGEGBygFtDKXD2t8" target="_blank" rel="noopener" class="btn-premium btn-primary">
+              <span class="cta-text" data-default="立即預約 AI 諮詢" data-hover="Status: Ready to Connect">立即預約 AI 諮詢</span>
+              <i class="fa-solid fa-calendar-check"></i>
+            </a>
+
+            <a href="#solutions" class="btn-premium btn-secondary">
+              <span class="cta-text" data-default="探索解決方案" data-hover="Status: Ready to Connect">探索解決方案</span>
+              <i class="fa-solid fa-compass"></i>
+            </a>
+          </div>
+
+          <div class="mt-10 grid max-w-2xl grid-cols-3 gap-3">
+            <div class="glass-card rounded-3xl p-4 text-center">
+              <p class="text-2xl font-black gradient-text">AI</p>
+              <p class="mt-1 text-xs font-bold text-muted">企業導入</p>
+            </div>
+            <div class="glass-card rounded-3xl p-4 text-center">
+              <p class="text-2xl font-black gradient-text">Data</p>
+              <p class="mt-1 text-xs font-bold text-muted">分析決策</p>
+            </div>
+            <div class="glass-card rounded-3xl p-4 text-center">
+              <p class="text-2xl font-black gradient-text">Lab</p>
+              <p class="mt-1 text-xs font-bold text-muted">實作共學</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual -->
+        <div class="relative reveal">
+          <div class="absolute -left-8 top-10 h-24 w-24 rounded-full bg-techBlue/15 blur-2xl"></div>
+          <div class="absolute -right-6 bottom-20 h-32 w-32 rounded-full bg-mintGreen/15 blur-2xl"></div>
+
+          <div class="glass-card soft-border shine relative rounded-[2rem] p-6 lg:p-8">
+            <div class="mb-5 flex items-center justify-between">
+              <div>
+                <p class="text-sm font-black text-muted">AI Transformation Console</p>
+                <p class="mt-1 text-2xl font-black tracking-tight text-ink">讓知識變成行動</p>
+              </div>
+              <div class="flex gap-2">
+                <span class="h-3 w-3 rounded-full bg-mintGreen/80"></span>
+                <span class="h-3 w-3 rounded-full bg-techBlue/70"></span>
+                <span class="h-3 w-3 rounded-full bg-premiumPurple/70"></span>
+              </div>
+            </div>
+
+            <div class="mb-6 flex items-center gap-4 rounded-[2rem] bg-white/70 p-4 shadow-card border border-primary-soft">
+              <div class="avatar-frame">
+                <img class="zoomable" src="ME3.jpg" alt="阿昌哥頭像">
+              </div>
+              <div>
+                <p class="text-sm font-bold uppercase tracking-[0.24em] text-muted">Founder</p>
+                <p class="text-xl font-black text-ink">阿昌哥</p>
+                <p class="mt-1 text-sm leading-6 text-muted">AI 教育與數位轉型顧問</p>
+              </div>
+            </div>
+
+            <div class="grid gap-4">
+              <div class="rounded-3xl border border-primary-soft bg-glass p-5">
+                <div class="mb-3 flex items-center justify-between">
+                  <span class="font-black text-ink">AI Readiness</span>
+                  <span class="rounded-full bg-accent-soft px-3 py-1 text-xs font-black text-accent">Ready</span>
+                </div>
+                <div class="h-3 overflow-hidden rounded-full bg-soft">
+                  <div class="h-full w-[86%] rounded-full bg-gradient-to-r from-techBlue via-premiumPurple to-mintGreen"></div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div class="rounded-3xl border border-soft bg-glass p-5 float-soft">
+                  <i class="fa-solid fa-chalkboard-user text-2xl text-techBlue"></i>
+                  <p class="mt-4 font-black text-ink">AI 教育訓練</p>
+                  <p class="mt-2 text-sm leading-6 text-muted">讓團隊從會用工具，進化到能設計流程。</p>
+                </div>
+
+                <div class="rounded-3xl border border-soft bg-glass p-5 float-soft-delay">
+                  <i class="fa-solid fa-database text-2xl text-premiumPurple"></i>
+                  <p class="mt-4 font-black text-ink">資料決策</p>
+                  <p class="mt-2 text-sm leading-6 text-muted">把數據轉化成可理解、可行動的洞察。</p>
+                </div>
+              </div>
+
+              <div class="rounded-3xl border border-soft bg-glass p-5">
+                <div class="flex items-start gap-4">
+                  <div class="icon-bubble flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
+                    <i class="fa-solid fa-network-wired text-techBlue"></i>
+                  </div>
+                  <div>
+                    <p class="font-black text-ink">AI Workflow Blueprint</p>
+                    <p class="mt-2 text-sm leading-6 text-muted">從需求盤點、流程設計、工具導入到團隊培訓，建立可持續擴展的 AI 應用生態。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card absolute -bottom-8 left-6 hidden rounded-3xl px-5 py-4 shadow-blueGlow sm:block">
+            <p class="text-xs font-black text-muted">Consulting Signal</p>
+            <p class="mt-1 font-black text-ink">
+              <span class="text-mintGreen">●</span> Ready to Scale
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         About
+    ========================== -->
+    <section id="about" class="px-5 py-24 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div class="reveal">
+            <span class="eyebrow">About Achang</span>
+            <h2 class="section-title mt-5 text-ink">
+              把複雜的 AI 技術，轉化成企業與學員真正用得上的能力。
+            </h2>
+            <div class="mt-10 grid gap-6 lg:grid-cols-[1fr_360px] items-start">
+              <div>
+                <p class="section-desc mt-6">
+                  阿昌哥是「阿昌哥研習共學」創辦人，專注於資料科學、生成式 AI 與數位轉型教育推廣。過去 2 年持續投入產業與學界課程設計，將 Python、LLM、GCP、AI 工具與資料分析技術，轉化為一般學員、企業團隊與教育工作者都能理解並實作的學習內容。
+                </p>
+              </div>
+              <div class="about-headshot-card">
+                <img class="zoomable" src="photos01/阿昌哥-headshot-01.jpg" alt="Headshot - 阿昌哥">
+                <div class="p-6 text-center">
+                  <p class="text-xs uppercase tracking-[0.36em] text-muted">Founder</p>
+                  <h3 class="mt-2 text-3xl font-black text-ink">阿昌哥</h3>
+                  <p class="mt-3 text-sm leading-7 text-muted">AI 教育與數位轉型顧問，擅長企業內訓、專案落地與跨域團隊能力升級。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <article class="glass-card soft-border reveal rounded-[1.75rem] p-6">
+              <div class="icon-bubble mb-5 flex h-12 w-12 items-center justify-center rounded-2xl">
+                <i class="fa-solid fa-user-tie text-techBlue"></i>
+              </div>
+              <h3 class="text-xl font-black text-ink">專業背景</h3>
+              <p class="mt-3 leading-7 text-muted">專注資料科學、生成式 AI、GCP、LLM 與資料分析，協助組織理解 AI 的應用邏輯與導入路徑。</p>
+            </article>
+
+            <article class="glass-card soft-border reveal rounded-[1.75rem] p-6">
+              <div class="icon-bubble mb-5 flex h-12 w-12 items-center justify-center rounded-2xl">
+                <i class="fa-solid fa-people-group text-premiumPurple"></i>
+              </div>
+              <h3 class="text-xl font-black text-ink">教學經驗</h3>
+              <p class="mt-3 leading-7 text-muted">曾於社團、LINE 群組、LINE 社群等學習場域擔任資料科學與 AI 課程講師，陪伴學員建立實務能力。</p>
+            </article>
+
+            <article class="glass-card soft-border reveal rounded-[1.75rem] p-6">
+              <div class="icon-bubble mb-5 flex h-12 w-12 items-center justify-center rounded-2xl">
+                <i class="fa-solid fa-building-columns text-mintGreen"></i>
+              </div>
+              <h3 class="text-xl font-black text-ink">產業經驗</h3>
+              <p class="mt-3 leading-7 text-muted">曾主持與參與金融業、化工業、網路廣告業、文教產業等資料科學與 AI 應用課程專案。</p>
+            </article>
+
+            <article class="glass-card soft-border reveal rounded-[1.75rem] p-6">
+              <div class="icon-bubble mb-5 flex h-12 w-12 items-center justify-center rounded-2xl">
+                <i class="fa-solid fa-seedling text-techBlue"></i>
+              </div>
+              <h3 class="text-xl font-black text-ink">品牌理念</h3>
+              <p class="mt-3 leading-7 text-muted">未來競爭力不只是會使用工具，而是能善用 AI 與資料，讓知識變成行動，讓學習帶來改變。</p>
+            </article>
+          </div>
+
+          <div class="mt-16 rounded-[2rem] border border-neutral-soft bg-soft p-8 shadow-sm">
+            <div class="mb-8 max-w-2xl">
+              <span class="eyebrow">現場實績</span>
+              <h3 class="section-title mt-4 text-ink">內訓與專案場景展示</h3>
+              <p class="section-desc mt-3 text-muted">這些都是阿昌哥親自參與的企業內訓與專案實作現場，從課堂教學到專案落地，全程陪伴協作。</p>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <article class="scene-card glass-card soft-border reveal">
+                <img class="zoomable" src="photos01/台灣 Top3 電信業-training-classroom-01.png" alt="電信業內訓現場">
+                <div class="scene-meta">
+                  <p class="text-xs uppercase tracking-[0.32em] text-white/80">內訓現場</p>
+                  <p class="mt-2 font-black text-lg">電信業培訓課堂</p>
+                </div>
+              </article>
+
+              <article class="scene-card glass-card soft-border reveal">
+                <img class="zoomable" src="photos01/工研院-training-classroom-02.png" alt="工研院內訓現場">
+                <div class="scene-meta">
+                  <p class="text-xs uppercase tracking-[0.32em] text-white/80">內訓現場</p>
+                  <p class="mt-2 font-black text-lg">工研院 AI 課程</p>
+                </div>
+              </article>
+
+              <article class="scene-card glass-card soft-border reveal">
+                <img class="zoomable" src="photos01/資策會-training-classroom-03.png" alt="資策會內訓現場">
+                <div class="scene-meta">
+                  <p class="text-xs uppercase tracking-[0.32em] text-white/80">企業專案</p>
+                  <p class="mt-2 font-black text-lg">資策會數位轉型</p>
+                </div>
+              </article>
+
+              <article class="scene-card glass-card soft-border reveal">
+                <img class="zoomable" src="photos01/國科會-expo-stage-01.jpg" alt="國科會專案展示場">
+                <div class="scene-meta">
+                  <p class="text-xs uppercase tracking-[0.32em] text-white/80">專案現場</p>
+                  <p class="mt-2 font-black text-lg">國科會展示舞台</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Solutions
+    ========================== -->
+    <section id="solutions" class="relative overflow-hidden px-5 py-24 lg:px-8">
+      <div class="absolute inset-x-0 top-20 -z-10 mx-auto h-72 max-w-5xl rounded-full bg-techBlue/12 blur-3xl"></div>
+
+      <div class="mx-auto max-w-7xl">
+        <div class="mx-auto max-w-3xl text-center reveal">
+          <span class="eyebrow">AI Solutions</span>
+          <h2 class="section-title mt-5 text-ink">AI 解決方案服務</h2>
+          <p class="section-desc mt-6">
+            我們協助企業將人工智慧真正落地，從人才培育、流程優化到智慧決策，打造符合企業需求的 AI 應用生態。透過策略規劃、系統整合與實務導入，讓 AI 不只是工具，而是企業成長、決策與競爭力提升的重要夥伴。
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="service-card glass-card soft-border shine reveal rounded-[1.75rem] p-6">
+            <div class="icon-bubble flex h-14 w-14 items-center justify-center rounded-2xl">
+              <i class="fa-solid fa-pen-ruler text-xl text-techBlue"></i>
+            </div>
+            <h3 class="mt-6 text-xl font-black text-ink">客製化 AI 課程設計</h3>
+            <p class="mt-3 leading-7 text-muted">依企業情境、學員程度與業務目標，設計可實作、可評估、可延伸的 AI 課程。</p>
+          </article>
+
+          <article class="service-card glass-card soft-border shine reveal rounded-[1.75rem] p-6">
+            <div class="icon-bubble flex h-14 w-14 items-center justify-center rounded-2xl">
+              <i class="fa-solid fa-users-gear text-xl text-premiumPurple"></i>
+            </div>
+            <h3 class="mt-6 text-xl font-black text-ink">企業內部 AI 教育訓練</h3>
+            <p class="mt-3 leading-7 text-muted">協助團隊建立 AI 共通語言，從工具操作到流程思維，提升跨部門協作效率。</p>
+          </article>
+
+          <article class="service-card glass-card soft-border shine reveal rounded-[1.75rem] p-6">
+            <div class="icon-bubble flex h-14 w-14 items-center justify-center rounded-2xl">
+              <i class="fa-solid fa-robot text-xl text-mintGreen"></i>
+            </div>
+            <h3 class="mt-6 text-xl font-black text-ink">AI 工作流程自動化 RPA</h3>
+            <p class="mt-3 leading-7 text-muted">將重複性任務、表單整理、訊息通知與文件產製轉化為可追蹤的自動化流程。</p>
+          </article>
+
+          <article class="service-card glass-card soft-border shine reveal rounded-[1.75rem] p-6">
+            <div class="icon-bubble flex h-14 w-14 items-center justify-center rounded-2xl">
+              <i class="fa-solid fa-palette text-xl text-techBlue"></i>
+            </div>
+            <h3 class="mt-6 text-xl font-black text-ink">AI 繪圖與設計輔助</h3>
+            <p class="mt-3 leading-7 text-muted">導入生成式設計流程，協助行銷、教學與品牌內容快速產出高品質視覺素材。</p>
+          </article>
+
+          <article class="service-card glass-card soft-border shine reveal rounded-[1.75rem] p-6">
+            <div class="icon-bubble flex h-14 w-14 items-center justify-center rounded-2xl">
+              <i class="fa-solid fa-chart-line text-xl text-premiumPurple"></i>
+            </div>
+            <h3 class="mt-6 text-xl font-black text-ink">AI 數據分析與預測模型建立</h3>
+            <p class="mt-3 leading-7 text-muted">從資料清理、視覺化、趨勢洞察到預測模型，讓企業決策更有根據。</p>
+          </article>
+
+          <article class="service-card glass-card soft-border shine reveal rounded-[1.75rem] p-6">
+            <div class="icon-bubble flex h-14 w-14 items-center justify-center rounded-2xl">
+              <i class="fa-solid fa-book-open-reader text-xl text-mintGreen"></i>
+            </div>
+            <h3 class="mt-6 text-xl font-black text-ink">私有化知識庫建置</h3>
+            <p class="mt-3 leading-7 text-muted">協助企業整理文件、知識、FAQ 與內部資料，建立可查詢、可維護的 AI 知識系統。</p>
+          </article>
+
+          <article class="service-card glass-card soft-border shine reveal rounded-[1.75rem] p-6">
+            <div class="icon-bubble flex h-14 w-14 items-center justify-center rounded-2xl">
+              <i class="fa-solid fa-route text-xl text-techBlue"></i>
+            </div>
+            <h3 class="mt-6 text-xl font-black text-ink">AI 團隊從 0 到 1 顧問規劃</h3>
+            <p class="mt-3 leading-7 text-muted">協助企業盤點需求、設計職能、建立導入節奏，打造能持續運作的 AI 小組。</p>
+          </article>
+
+          <article class="service-card glass-card soft-border shine reveal rounded-[1.75rem] p-6">
+            <div class="icon-bubble flex h-14 w-14 items-center justify-center rounded-2xl">
+              <i class="fa-solid fa-bullhorn text-xl text-premiumPurple"></i>
+            </div>
+            <h3 class="mt-6 text-xl font-black text-ink">AI 行銷自動化設計</h3>
+            <p class="mt-3 leading-7 text-muted">串接內容生成、客群分析、行銷素材與成效追蹤，讓行銷流程更精準、更快速。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Cases
+    ========================== -->
+    <section id="cases" class="px-5 py-24 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div class="max-w-3xl reveal">
+            <span class="eyebrow">Case Studies</span>
+            <h2 class="section-title mt-5 text-ink">實戰案例與作品集</h2>
+            <p class="section-desc mt-6">
+              以下為示意案例方向，呈現阿昌哥研習共學如何將教育訓練、資料分析、知識管理與自動化流程整合成可落地的 AI 專案。
+            </p>
+          </div>
+          <a href="https://calendar.app.google/AzGEGBygFtDKXD2t8" target="_blank" rel="noopener" class="btn-premium btn-secondary reveal">
+            <span class="cta-text" data-default="討論我的導入情境" data-hover="Status: Ready to Connect">討論我的導入情境</span>
+            <i class="fa-solid fa-comments"></i>
+          </a>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-4">
+          <article class="case-card glass-card soft-border reveal rounded-[2rem] p-6">
+            <div class="mb-5 flex h-48 items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-primary-soft via-white to-secondary-soft">
+              <i class="fa-solid fa-chalkboard-user text-6xl text-techBlue/80"></i>
+            </div>
+            <p class="text-sm font-black text-techBlue">Training Blueprint</p>
+            <h3 class="mt-2 text-xl font-black text-ink">企業 AI 教育訓練</h3>
+            <p class="mt-3 leading-7 text-muted">針對不同部門設計 AI 工具、Prompt、資料整理與工作流課程，讓團隊快速建立共同語言。</p>
+          </article>
+
+          <article class="case-card glass-card soft-border reveal rounded-[2rem] p-6">
+            <div class="mb-5 flex h-48 items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-accent-soft via-white to-primary-soft">
+              <i class="fa-solid fa-gears text-6xl text-mintGreen/80"></i>
+            </div>
+            <p class="text-sm font-black text-mintGreen">Workflow Automation</p>
+            <h3 class="mt-2 text-xl font-black text-ink">AI 自動化工作流程</h3>
+            <p class="mt-3 leading-7 text-muted">將表單、報表、通知、摘要與文件產生串成流程，減少重複人工處理時間。</p>
+          </article>
+
+          <article class="case-card glass-card soft-border reveal rounded-[2rem] p-6">
+            <div class="mb-5 flex h-48 items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-secondary-soft via-white to-primary-soft">
+              <i class="fa-solid fa-server text-6xl text-premiumPurple/80"></i>
+            </div>
+            <p class="text-sm font-black text-premiumPurple">Knowledge System</p>
+            <h3 class="mt-2 text-xl font-black text-ink">私有化知識庫建置</h3>
+            <p class="mt-3 leading-7 text-muted">整理企業內部文件、SOP 與知識資產，建立安全、可查詢、可更新的 AI 知識助理。</p>
+          </article>
+
+          <article class="case-card glass-card soft-border reveal rounded-[2rem] p-6">
+            <div class="mb-5 flex h-48 items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-primary-soft via-white to-accent-soft">
+              <i class="fa-solid fa-chart-pie text-6xl text-techBlue/80"></i>
+            </div>
+            <p class="text-sm font-black text-techBlue">Data Dashboard</p>
+            <h3 class="mt-2 text-xl font-black text-ink">AI 數據分析儀表板</h3>
+            <p class="mt-3 leading-7 text-muted">整合資料清理、趨勢分析與視覺化，協助管理者快速掌握營運重點與決策訊號。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Blog
+    ========================== -->
+    <section id="blog" class="relative px-5 py-24 lg:px-8">
+      <div class="absolute inset-x-0 top-0 -z-10 mx-auto h-80 max-w-4xl rounded-full bg-premiumPurple/18 blur-3xl"></div>
+
+      <div class="mx-auto max-w-7xl">
+        <div class="mx-auto max-w-3xl text-center reveal">
+          <span class="eyebrow">Tech Articles</span>
+          <h2 class="section-title mt-5 text-ink">技術文章與觀點</h2>
+          <p class="section-desc mt-6">
+            用清楚、可理解的方式，分享企業 AI 導入、知識庫建置、生成式 AI 工作流與資料分析實務。
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-3">
+          <article class="blog-card glass-card soft-border shine reveal rounded-[2rem] p-7">
+            <div class="mb-6 flex items-center justify-between">
+              <span class="rounded-full bg-primary-soft px-4 py-2 text-xs font-black text-techBlue">AI Strategy</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-soft"></i>
+            </div>
+            <h3 class="text-2xl font-black tracking-tight text-ink">企業導入 AI 的第一步</h3>
+            <p class="mt-4 leading-8 text-muted">不是先買工具，而是先盤點場景、資料、流程與人才能力，找出真正值得被 AI 放大的工作節點。</p>
+            <a href="#contact" class="mt-7 inline-flex items-center gap-2 font-black text-techBlue">
+              閱讀方向 <i class="fa-solid fa-arrow-right text-sm"></i>
+            </a>
+          </article>
+
+          <article class="blog-card glass-card soft-border shine reveal rounded-[2rem] p-7">
+            <div class="mb-6 flex items-center justify-between">
+              <span class="rounded-full bg-secondary-soft px-4 py-2 text-xs font-black text-secondary">Knowledge Base</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-soft"></i>
+            </div>
+            <h3 class="text-2xl font-black tracking-tight text-ink">如何建立 AI 知識庫</h3>
+            <p class="mt-4 leading-8 text-muted">從文件整理、權限設計、檢索流程到回答品質測試，讓企業知識能被安全、穩定地重複使用。</p>
+            <a href="#contact" class="mt-7 inline-flex items-center gap-2 font-black text-techBlue">
+              閱讀方向 <i class="fa-solid fa-arrow-right text-sm"></i>
+            </a>
+          </article>
+
+          <article class="blog-card glass-card soft-border shine reveal rounded-[2rem] p-7">
+            <div class="mb-6 flex items-center justify-between">
+              <span class="rounded-full bg-accent-soft px-4 py-2 text-xs font-black text-accent">Workflow</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-soft"></i>
+            </div>
+            <h3 class="text-2xl font-black tracking-tight text-ink">生成式 AI 如何改變工作流程</h3>
+            <p class="mt-4 leading-8 text-muted">AI 的價值不只在單次回答，而在協助團隊重設資訊流、決策流與執行流，讓工作更有節奏。</p>
+            <a href="#contact" class="mt-7 inline-flex items-center gap-2 font-black text-techBlue">
+              閱讀方向 <i class="fa-solid fa-arrow-right text-sm"></i>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Contact CTA
+    ========================== -->
+    <section id="contact" class="px-5 py-24 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="glass-card soft-border relative overflow-hidden rounded-[2.3rem] p-8 text-center shadow-blueGlow sm:p-12 lg:p-16 reveal">
+          <div class="absolute left-10 top-10 h-20 w-20 rounded-full bg-techBlue/15 blur-2xl"></div>
+          <div class="absolute bottom-8 right-10 h-24 w-24 rounded-full bg-mintGreen/15 blur-2xl"></div>
+
+          <div class="relative z-10 mx-auto max-w-4xl">
+            <span class="eyebrow">Book a Consultation</span>
+            <h2 class="mt-6 text-4xl font-black tracking-tight text-ink sm:text-5xl lg:text-6xl">
+              準備好讓 AI 成為組織成長的下一個引擎了嗎？
+            </h2>
+            <p class="mx-auto mt-6 max-w-2xl text-lg leading-9 text-muted">
+              讓我們一起盤點你的企業情境、流程痛點與人才需求，設計一套能真正落地的 AI 轉型路線。
+            </p>
+
+            <div class="mt-10 flex justify-center">
+              <a href="https://calendar.app.google/AzGEGBygFtDKXD2t8" target="_blank" rel="noopener" class="btn-premium btn-primary text-base sm:text-lg">
+                <span class="cta-text" data-default="預約一場 AI 轉型諮詢" data-hover="Status: Ready to Connect">預約一場 AI 轉型諮詢</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="mt-9 flex flex-wrap justify-center gap-3">
+              <span class="rounded-full border border-techBlue/15 bg-glass px-4 py-2 text-sm font-bold text-muted">AI 教育培訓</span>
+              <span class="rounded-full border border-techBlue/15 bg-glass px-4 py-2 text-sm font-bold text-muted">流程自動化</span>
+              <span class="rounded-full border border-techBlue/15 bg-glass px-4 py-2 text-sm font-bold text-muted">資料分析</span>
+              <span class="rounded-full border border-techBlue/15 bg-glass px-4 py-2 text-sm font-bold text-muted">知識庫建置</span>
+              <span class="rounded-full border border-techBlue/15 bg-glass px-4 py-2 text-sm font-bold text-muted">AI 團隊顧問</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================
+       Footer
+  ========================== -->
+  <footer class="border-t border-neutral-soft bg-glass px-5 py-12 backdrop-blur-xl lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-8 lg:flex-row lg:items-start">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-techBlue via-premiumPurple to-mintGreen text-white">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <div>
+            <p class="text-lg font-black text-ink">阿昌哥研習共學</p>
+            <p class="text-sm font-bold text-muted">讓知識變成行動，讓學習帶來改變。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid w-full gap-4 sm:grid-cols-3 lg:max-w-4xl">
+        <a href="https://forms.gle/HeVEsa9UbRxfcsnb6" target="_blank" rel="noopener" class="glass-card soft-border group rounded-[1.8rem] border border-neutral-soft bg-glass p-5 transition hover:-translate-y-1 hover:border-techBlue">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-techBlue text-white">
+              <i class="fa-solid fa-gears text-lg"></i>
+            </div>
+            <div>
+              <p class="font-black text-ink">115-06/13~06/20 n8n 自動化助理實戰營</p>
+              <p class="mt-1 text-xs text-muted">0 程式基礎打造 AI 數位秘書</p>
+            </div>
+          </div>
+          <div class="mt-4 space-y-2 text-sm">
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-calendar text-techBlue"></i> 📅 06/13、06/20 共 12 小時</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-cube text-techBlue"></i> 🧩 視覺化畫布，像樂高般組裝</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-sparkles text-techBlue"></i> ✨ 串接 GPT/Gemini/Groq</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-award text-techBlue"></i> 🎓 帶走 4 套可直接運行的數位助手</p>
+          </div>
+        </a>
+
+        <a href="https://forms.gle/2iLq9YfYirMwPZXG9" target="_blank" rel="noopener" class="glass-card soft-border group rounded-[1.8rem] border border-neutral-soft bg-glass p-5 transition hover:-translate-y-1 hover:border-premiumPurple">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-premiumPurple text-white">
+              <i class="fa-solid fa-brain text-lg"></i>
+            </div>
+            <div>
+              <p class="font-black text-ink">115-06/14~06/21 AI 自主代理人實戰班</p>
+              <p class="mt-1 text-xs text-muted">AI Agent × Hermes Agent 數位員工系統</p>
+            </div>
+          </div>
+          <div class="mt-4 space-y-2 text-sm">
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-calendar text-premiumPurple"></i> 📅 06/14、06/21 共 12 小時</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-robot text-premiumPurple"></i> 🤖 Hermes Agent × OpenClaw 整合</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-comments text-premiumPurple"></i> 💬 LINE/Telegram 通道連結</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-check text-premiumPurple"></i> ✅ 思考、記憶、執行、通知、搜尋、生成完整能力</p>
+          </div>
+        </a>
+
+        <a href="https://forms.gle/EuNmrsdajLy7e5WG6" target="_blank" rel="noopener" class="glass-card soft-border group rounded-[1.8rem] border border-neutral-soft bg-glass p-5 transition hover:-translate-y-1 hover:border-mintGreen">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-mintGreen text-white">
+              <i class="fa-solid fa-film text-lg"></i>
+            </div>
+            <div>
+              <p class="font-black text-ink">115-06/28 Google Flow 影音創作革命實戰營</p>
+              <p class="mt-1 text-xs text-muted">智能體、Omni Flash 與 Flow Music 跨模態工作坊</p>
+            </div>
+          </div>
+          <div class="mt-4 space-y-2 text-sm">
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-calendar text-mintGreen"></i> 📅 06/28（日）6 小時密集營</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-wand-magic-sparkles text-mintGreen"></i> 🎬 一張照片轉好萊塢級動態影片</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-music text-mintGreen"></i> 🎵 Flow Music 錄音室級原創配樂</p>
+            <p class="flex items-center gap-2 text-muted"><i class="fa-solid fa-face-smile text-mintGreen"></i> 😊 AI 虛擬代言人會說話對嘴</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="mx-auto mt-10 flex max-w-7xl flex-col gap-6 border-t border-neutral-soft pt-6 text-sm font-medium text-muted lg:flex-row lg:items-start lg:justify-between">
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="eyebrow">外部依賴庫 (Dependencies)</span>
+          <a href="https://line.me/ti/p/YNF7bFNqm6" target="_blank" rel="noopener" class="flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-soft bg-glass text-[#00c300] transition hover:-translate-y-1 hover:text-[#00c300]">
+            <i class="fa-brands fa-line"></i>
+          </a>
+          <a href="https://www.facebook.com/s810802/" target="_blank" rel="noopener" class="flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-soft bg-glass text-[#1877f2] transition hover:-translate-y-1 hover:text-[#1877f2]">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/chang-shiun-shie-75b618b0/" target="_blank" rel="noopener" class="flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-soft bg-glass text-[#0a66c2] transition hover:-translate-y-1 hover:text-[#0a66c2]">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/s810802/" target="_blank" rel="noopener" class="flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-soft bg-glass text-ink transition hover:-translate-y-1 hover:text-ink">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+
+        <div class="rounded-[1.8rem] border border-neutral-soft bg-soft p-5 shadow-sm">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p class="font-black text-ink">填寫需求表單</p>
+              <p class="mt-1 text-sm text-muted">直接把你的專案需求與優先方向告訴我們，讓我們更快規劃最適方案。</p>
+            </div>
+            <a href="https://forms.gle/JsdbK358wbV4mCza9" target="_blank" rel="noopener" class="btn-premium btn-primary rounded-2xl px-5 py-3 text-sm font-black text-white">
+              前往填寫需求表單
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://calendar.app.google/AzGEGBygFtDKXD2t8" target="_blank" rel="noopener" class="rounded-2xl bg-ink px-5 py-3 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-techBlue">
+        預約諮詢
+      </a>
+    </div>
+
+    <div class="mx-auto mt-10 max-w-7xl border-t border-neutral-soft pt-6 text-sm font-medium text-muted">
+      © <span id="year"></span> 阿昌哥研習共學. All rights reserved.
+    </div>
+  </footer>
+
+  <div id="imageModal" class="image-modal" role="dialog" aria-modal="true" aria-labelledby="imageModalCaption">
+    <div class="image-modal-content">
+      <button id="imageModalClose" class="image-modal-close" aria-label="關閉圖片檢視">×</button>
+      <img id="imageModalImg" src="" alt="" />
+      <div class="image-modal-caption" id="imageModalCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ======================================================
+       1. Typewriter Effect
+    ====================================================== */
+    const typewriterEl = document.getElementById('typewriter');
+    const typeText = 'AI 賦能企業．智慧驅動未來';
+    let typeIndex = 0;
+
+    function typeWriter() {
+      if (!typewriterEl) return;
+
+      if (typeIndex <= typeText.length) {
+        typewriterEl.textContent = typeText.slice(0, typeIndex);
+        typeIndex++;
+        setTimeout(typeWriter, 92);
+      }
+    }
+
+    window.addEventListener('load', typeWriter);
+
+    /* ======================================================
+       1.5. Image Zoom Modal
+    ====================================================== */
+    const imageModal = document.getElementById('imageModal');
+    const imageModalImg = document.getElementById('imageModalImg');
+    const imageModalCaption = document.getElementById('imageModalCaption');
+    const imageModalClose = document.getElementById('imageModalClose');
+
+    function closeImageModal() {
+      imageModal.classList.remove('show');
+      document.body.style.overflow = '';
+      imageModalImg.src = '';
+      imageModalCaption.textContent = '';
+    }
+
+    document.querySelectorAll('img.zoomable').forEach(img => {
+      img.addEventListener('click', () => {
+        imageModalImg.src = img.src;
+        imageModalImg.alt = img.alt || '';
+        imageModalCaption.textContent = img.alt || '點擊任意處關閉';
+        imageModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    imageModalClose.addEventListener('click', closeImageModal);
+    imageModal.addEventListener('click', (event) => {
+      if (event.target === imageModal || event.target === imageModalClose) {
+        closeImageModal();
+      }
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && imageModal.classList.contains('show')) {
+        closeImageModal();
+      }
+    });
+
+    /* ======================================================
+       2. Mobile Menu
+    ====================================================== */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      const icon = menuBtn.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-xmark');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        const icon = menuBtn.querySelector('i');
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-xmark');
+      });
+    });
+
+    /* ======================================================
+       3. Smooth Scroll Offset for Fixed Navbar
+    ====================================================== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+
+        const target = document.querySelector(targetId);
+        if (!target) return;
+
+        e.preventDefault();
+        const navHeight = document.getElementById('navbar').offsetHeight;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight + 2;
+
+        window.scrollTo({
+          top,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    /* ======================================================
+       4. Button Hover Text Switch
+    ====================================================== */
+    const ctaTexts = document.querySelectorAll('.cta-text');
+
+    ctaTexts.forEach(text => {
+      const parent = text.closest('a, button');
+      if (!parent) return;
+
+      parent.addEventListener('mouseenter', () => {
+        const hoverText = text.dataset.hover;
+        if (hoverText) text.textContent = hoverText;
+      });
+
+      parent.addEventListener('mouseleave', () => {
+        const defaultText = text.dataset.default;
+        if (defaultText) text.textContent = defaultText;
+      });
+    });
+
+    /* ======================================================
+       5. Reveal on Scroll
+    ====================================================== */
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('show');
+          }, index * 70);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ======================================================
+       6. Navbar Scroll State
+    ====================================================== */
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.style.boxShadow = '0 12px 40px rgba(15, 23, 42, 0.06)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+
+    /* ======================================================
+       7. White Tech Canvas: Soft Particles + Connections
+    ====================================================== */
+    const canvas = document.getElementById('techCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    let width;
+    let height;
+    let animationFrame;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth * window.devicePixelRatio;
+      height = canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+      initParticles();
+    }
+
+    function initParticles() {
+      const count = Math.min(90, Math.floor(window.innerWidth / 18));
+      particles = [];
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          radius: Math.random() * 1.8 + 0.7,
+          vx: (Math.random() - 0.5) * 0.22,
+          vy: (Math.random() - 0.5) * 0.22,
+          alpha: Math.random() * 0.35 + 0.16
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+        if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 5);
+        gradient.addColorStop(0, `rgba(37, 99, 235, ${p.alpha})`);
+        gradient.addColorStop(0.55, `rgba(16, 185, 129, ${p.alpha * 0.18})`);
+        gradient.addColorStop(1, 'rgba(37, 99, 235, 0)');
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const maxDistance = 125;
+
+          if (distance < maxDistance) {
+            const opacity = (1 - distance / maxDistance) * 0.12;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationFrame = requestAnimationFrame(drawParticles);
+    }
+
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(animationFrame);
+      resizeCanvas();
+      drawParticles();
+    });
+
+    resizeCanvas();
+    drawParticles();
+
+    /* ======================================================
+       8. Footer Year
+    ====================================================== */
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
